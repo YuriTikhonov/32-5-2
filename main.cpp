@@ -18,7 +18,8 @@ struct Movie
 
 int main()
 {
-     /*std::ofstream file("movie.json");
+    std::string findName;
+     std::ofstream file("movie.json");
       nlohmann::json dict = {
               {"Movie title",movie.movieTitle = "Mesto vstrechi izmenit nelzya"},{
                   {"Country",movie.country = "USSR"},
@@ -52,13 +53,20 @@ int main()
 
       };
 
-      file << dict;*/
+      file << dict;
+     file.close();
 
     std::ifstream i("movie.json");
     nlohmann::json j;
     i >> j;
-
+    std::cout << "Enter name of actor you want to know about:";
+    std::cin >> findName;
     for (nlohmann::json::iterator it = j.begin(); it != j.end(); ++it) {
+       /* if(it.value()["Actors"] == findName)
+        {
+            std::cout << it.value()["movieTitle"];
+        }*/
         std::cout << *it << '\n';
     }
+    i.close();
 }
