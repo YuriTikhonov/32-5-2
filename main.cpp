@@ -14,7 +14,7 @@ struct Movie
     std::string director;
     //std::string producer;
     std::unordered_map<std::string,std::string>actors;
-}movie,movie2;//,movie3,movie4,movie5;
+}movie,movie1,movie2;//,movie3,movie4;
 
 int main()
 {
@@ -26,8 +26,8 @@ int main()
                   {"Production date",movie.productionDate = 1979},
                   {"Company",movie.company = "Odessa kinokompany"},
                   {"Script author",movie.scriptAuthor = "Stanislav Govorukhin"},
-                      {"Director",movie2.director = "Some Name"},
-                  {"Actors:", movie.actors = {{"Gleb Zheglov",    "Vladimir Vysotskiy"},
+                      {"Director",movie.director = "Some Name"},
+                  {"Actors:", movie.actors = {{"Gleb Zheglov",    "Vysotskiy"},
                                               {"Volodya Sharapov", "Vladimir Konkin"},
                                               {"Grudsev",        "Sergey Yurskiy"},
                                               {"Petr Ruchnikov ",  "Evgeniy Evstigneev"},
@@ -49,24 +49,55 @@ int main()
                                         {"Gyul'chatay","Tatyana Fedotova"},
                                         {"Petrukha","Nikolay Godovikov"}
                       }
+                      }},
+              {"Movie title",movie1.movieTitle = "The Matrix"},{
+               {"Country",movie1.country = "USA"},
+                      {"Production date",movie1.productionDate = 1999},
+                      {"Company",movie1.company = "Warner Brothers"},
+                      {"Script author",movie1.scriptAuthor = "Wachowski Lilly\n"
+                                                             "Wachowski Lana\n"
+                                                             ""},
+                      {"Director",movie1.director = "Wachowski"},
+                      {"Actors:",movie1.actors = {{"Neo",    "Keanu Reeves"},
+                                                  {"Morpheus", "Laurence Fishbourne"},
+                                                  {"Trinity",        "Carrie-Anne Moss"},
+                                                  {"Cypher",  "Joe Pantoliano"},
+                                                  {"Agent Smith","Hugo Weaving"},
+                                                  {"The Oracle","Glogia Foster"}
+                      }
                       }}
 
       };
 
       file << dict;
-     file.close();
+      file.close();
 
     std::ifstream i("movie.json");
     nlohmann::json j;
     i >> j;
-    std::cout << "Enter name of actor you want to know about:";
-    std::cin >> findName;
-    for (nlohmann::json::iterator it = j.begin(); it != j.end(); ++it) {
-       /* if(it.value()["Actors"] == findName)
+
+   for(const auto& item : j.items())
+    {
+        std::cout << item.key() << std::endl;
+        for(const auto& val :item.value().items())
         {
-            std::cout << it.value()["movieTitle"];
-        }*/
-        std::cout << *it << '\n';
+            std::cout << " " << val.key() << ":" << val.value() << std::endl;
+        }
     }
+    /*for (auto& [key, val] : j.items())
+    {
+
+        if(val.contains("Keanu Reeves"))
+        {
+            std::cout << "found" << std::endl;
+        }else{std::cout <<"not found" << std::endl;}
+       // std::cout << "key: " << key << ", value:" << val << '\n';
+    }*/
+   /* for(const auto& item : j.items())
+    {
+        std::cout << item.key() << std::endl;
+        std::cout << item.value().get<std::string>() << std::endl;
+    }*/
+
     i.close();
 }
