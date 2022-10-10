@@ -19,6 +19,7 @@ struct Movie
 int main()
 {
     std::string findName;
+    std::string s;
      std::ofstream file("movie.json");
       nlohmann::json dict = {
               {"Movie title",movie.movieTitle = "Mesto vstrechi izmenit nelzya"},{
@@ -27,7 +28,7 @@ int main()
                   {"Company",movie.company = "Odessa kinokompany"},
                   {"Script author",movie.scriptAuthor = "Stanislav Govorukhin"},
                       {"Director",movie.director = "Some Name"},
-                  {"Actors:", movie.actors = {{"Gleb Zheglov",    "Vysotskiy"},
+                  {"Actors", movie.actors = {{"Gleb Zheglov",    "Vysotskiy"},
                                               {"Volodya Sharapov", "Vladimir Konkin"},
                                               {"Grudsev",        "Sergey Yurskiy"},
                                               {"Petr Ruchnikov ",  "Evgeniy Evstigneev"},
@@ -42,7 +43,7 @@ int main()
                                              "Rustam Ibragimbekov\n"
                                              "Mark Zakharov"},
                       {"Director",movie2.director = "Vladimir Motyl"},
-                      {"Actors:",movie2.actors = {{"Fyodor Sukhov",    "Anatoliy Kuznetzov"},
+                      {"Actors",movie2.actors = {{"Fyodor Sukhov",    "Anatoliy Kuznetzov"},
                                         {"Said", "Spartak Mishulin"},
                                         {"Abdulla",        "Kakhi Kavasadze"},
                                         {"Vereschagin",  "Pavel Luspekaev"},
@@ -58,7 +59,7 @@ int main()
                                                              "Wachowski Lana\n"
                                                              ""},
                       {"Director",movie1.director = "Wachowski"},
-                      {"Actors:",movie1.actors = {{"Neo",    "Keanu Reeves"},
+                      {"Actors",movie1.actors = {{"Neo",    "Keanu Reeves"},
                                                   {"Morpheus", "Laurence Fishbourne"},
                                                   {"Trinity",        "Carrie-Anne Moss"},
                                                   {"Cypher",  "Joe Pantoliano"},
@@ -76,27 +77,30 @@ int main()
     nlohmann::json j;
     i >> j;
 
-   for(const auto& item : j.items())
+  /* for(const auto& item : j.items())
     {
-        std::cout << item.key() << std::endl;
+        //std::cout << item.key() << std::endl;
+
         for(const auto& val :item.value().items())
         {
-            std::cout << " " << val.key() << ":" << val.value() << std::endl;
+            if(val.key(),val.value() == "Actors","Neo"){
+                std::cout << " " << val.key() << ":" << val.value() << std::endl;
+            }
+            //std::cout << " " << val.key() << ":" << val.value() << std::endl;
+
+
         }
-    }
-    /*for (auto& [key, val] : j.items())
+    }*/
+    for (auto& [key, val] : j.items())
     {
 
-        if(val.contains("Keanu Reeves"))
-        {
-            std::cout << "found" << std::endl;
-        }else{std::cout <<"not found" << std::endl;}
-       // std::cout << "key: " << key << ", value:" << val << '\n';
-    }*/
-   /* for(const auto& item : j.items())
+
+        std::cout << "key: " << key << ", value:" << val << '\n';
+    }
+    /*for(const auto& item : j.items())
     {
         std::cout << item.key() << std::endl;
-        std::cout << item.value().get<std::string>() << std::endl;
+        std::cout << item.value() << std::endl;
     }*/
 
     i.close();
