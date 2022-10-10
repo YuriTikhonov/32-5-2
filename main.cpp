@@ -2,7 +2,7 @@
 #include <string>
 #include <fstream>
 #include <unordered_map>
-#include "nlohmann_json/include/nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 
 struct Movie
 {
